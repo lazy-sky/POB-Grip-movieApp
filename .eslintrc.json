@@ -1,4 +1,9 @@
 {
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jasmine": true
+  },
   "extends": [
     "airbnb", 
     "airbnb/hooks", 
@@ -6,10 +11,6 @@
     "prettier", 
     "eslint:recommended"
   ],
-  "env": {
-    "browser": true,
-    "jasmine": true
-  },
   "settings": {
     "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
     "import/resolver": {
@@ -25,6 +26,13 @@
   "plugins": ["simple-import-sort"],
   "rules": {
     "arrow-body-style": "off",
+    "eol-last": ["error", "always"],
+    "indent": ["error", 2],
+    "max-len": ["error", { "code": 90 }],
+    "no-multi-spaces": "error",
+    "no-trailing-spaces": "error",
+    "space-before-blocks": "error",
+    "space-infix-ops": "error",
     "semi": ["error", "always"],
     "react/function-component-definition": ["warn", { "namedComponents": "arrow-function" }],
     "react/jsx-one-expression-per-line": "off",
