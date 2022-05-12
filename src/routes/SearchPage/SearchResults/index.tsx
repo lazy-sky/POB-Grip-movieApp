@@ -62,7 +62,7 @@ const SearchResults = () => {
   };
 
   return (
-    movies
+    movies.length
       ? <ul className={styles.searchResults}>
         {movies.map(movie => {
           const { imdbID, Poster, Title, Year, Type } = movie;
