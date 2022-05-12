@@ -1,5 +1,8 @@
+import { Suspense, useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { favoritesState, searchResults } from 'store/atoms';
+import { getMovies } from 'services/movie';
+import { favoritesState, searchKeywordState, searchResults } from 'store/atoms';
 import { favoritesIdsState } from 'store/selectors';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -9,9 +12,32 @@ import NoImage from '../../../assets/images/no-image.jpg';
 import styles from './searchResults.module.scss';
 
 const SearchResults = () => {
-  const movies = useRecoilValue<IMovie[]>(searchResults);
+  const [movies, setMovies] = useRecoilState<IMovie[]>(searchResults);
   const [favorites, setFavorites] = useRecoilState<IMovie[]>(favoritesState);
   const favoritesIds = useRecoilValue(favoritesIdsState);
+  const keyword = useRecoilValue(searchKeywordState);
+  const [page, setPage] = useState(1);
+
+  const { ref, inView, entry } = useInView({
+    /* Optional options */
+    threshold: 1,
+  });
+
+  useEffect(() => {
+    // TODO: 왜 첫 페이지는 두 번 렌더링하는가...
+    if (page === 1) {
+      setPage((prev) => prev + 1);
+      return;
+    }
+
+    (async () => {
+      if (inView) {
+        setPage((prev) => prev + 1);
+        const { Search } = await getMovies({ keyword, page });
+        setMovies(prev => [...prev, ...Search]);
+      }
+    })();
+  }, [entry, inView, keyword, setMovies]);
 
   const MySwal = withReactContent(Swal);
 
@@ -70,31 +96,32 @@ const SearchResults = () => {
   return (
     movies && movies.length > 0
       ? <ul className={styles.searchResults}>
-        {movies.map(movie => {
-          const { imdbID, Poster, Title, Year, Type } = movie;
-
-          return (
-            <li key={`movie-${imdbID}`}>
-              <button
-                type='button'
-                onClick={() =>handleMovieClick(movie)}
-              >
-                <div className={styles.moviePoster}>
-                  {Poster === 'N/A'
-                    ? <img src={NoImage} alt={Title} />
-                    : <img src={Poster} alt={Title} />
-                  }
-                </div>
-                <div className={styles.movieInfo}>
-                  <h4>{Title}</h4>
-                  <div>{Year}</div>
-                  <div>{Type}</div>
-                  {checkIsFavorite(imdbID) && <div>즐겨찾기에 추가된 영화입니다!</div>}
-                </div>
-              </button>
-            </li>
-          );
-        })}
+        <Suspense fallback={<h1>Loading profile...</h1>}>
+          {movies?.map((movie) => {
+            const { imdbID, Poster, Title, Year, Type } = movie;
+            return (
+              <li ref={ref} key={`movie-${imdbID}`}>
+                <button
+                  type='button'
+                  onClick={() =>handleMovieClick(movie)}
+                >
+                  <div className={styles.moviePoster}>
+                    {Poster === 'N/A'
+                      ? <img src={NoImage} alt={Title} />
+                      : <img src={Poster} alt={Title} />
+                    }
+                  </div>
+                  <div className={styles.movieInfo}>
+                    <h4>{Title}</h4>
+                    <div>{Year}</div>
+                    <div>{Type}</div>
+                    {checkIsFavorite(imdbID) && <div>즐겨찾기에 추가된 영화입니다!</div>}
+                  </div>
+                </button>
+              </li>
+            );
+          })}
+        </Suspense>
       </ul>
       : <div style={{ marginTop: '20px' }}>검색 결과가 없습니다</div>
   );
