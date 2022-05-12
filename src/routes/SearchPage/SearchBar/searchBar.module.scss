@@ -1,0 +1,28 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/constants/breakpoints';
+
+.searchBar {
+  position: sticky;
+  top: 80px;
+  width: 80%;
+  min-width: calc(breakpoints.$MD - 40px);
+  margin: 0 auto;
+  background-color: colors.$GRAYE;
+
+  form {
+    display: grid;
+    grid-template-columns: 1fr 100px;
+  }
+
+  input {
+    padding: 16px 24px;
+    background-color: inherit;
+  }
+
+  button {
+    padding: 16px 32px;
+    font-size: 16px;
+    color: colors.$WHITE;
+    background-color: colors.$TEAL;
+  }
+}
