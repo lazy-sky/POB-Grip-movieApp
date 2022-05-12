@@ -9,7 +9,7 @@ import styles from './searchResults.module.scss';
 
 const SearchResults = () => {
   const movies = useRecoilValue<IMovie[]>(searchResults);
-  const [favorites, setFavorites] = useRecoilState(favoritesState);
+  const [favorites, setFavorites] = useRecoilState<IMovie[]>(favoritesState);
 
   const MySwal = withReactContent(Swal);
 
@@ -49,8 +49,8 @@ const SearchResults = () => {
       cancelButtonColor: '#d33',
       confirmButtonText: '추가',
       cancelButtonText: '취소'
-    }).then((result) => {
-      if (result.isConfirmed) {
+    }).then(({ isConfirmed }) => {
+      if (isConfirmed) {
         setFavorites((prev: IMovie[]) => [movie, ...prev]);
         MySwal.fire(
           'Added!',
