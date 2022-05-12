@@ -10,8 +10,13 @@ import styles from './searchResults.module.scss';
 const SearchResults = () => {
   const movies = useRecoilValue<IMovie[]>(searchResults);
   const [favorites, setFavorites] = useRecoilState<IMovie[]>(favoritesState);
+  const favoritesIds = favorites.map(({ imdbID }) => imdbID);
 
   const MySwal = withReactContent(Swal);
+
+  const checkIsFavorite = (id: string) => {
+    return favoritesIds.includes(id);
+  };
 
   const handleMovieClick = (movie: IMovie) => {
     const isAlreadySaved = favorites
@@ -83,6 +88,7 @@ const SearchResults = () => {
                   <h4>{Title}</h4>
                   <div>{Year}</div>
                   <div>{Type}</div>
+                  {checkIsFavorite(imdbID) && <div>즐겨찾기에 추가된 영화입니다!</div>}
                 </div>
               </button>
             </li>
