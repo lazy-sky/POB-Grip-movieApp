@@ -3,10 +3,12 @@
 
 .app {
   position: relative;
-  min-width: calc(breakpoints.$MD - 1px);
+  min-width: breakpoints.$MD;
+  min-height: 100vh;
+  color: colors.$WHITE;
+  background: linear-gradient(135deg, #ff008a, #ff462b);
 }
 
 .pages {
-  min-height: 100vh;
   padding: 48px 36px;
 }
