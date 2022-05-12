@@ -1,29 +1,30 @@
 @use '/src/styles/constants/colors';
+@use '/src/styles/constants/sizes';
+@import '/src/styles/mixins/text';
 
 .gnb {
-  position: sticky;
+  position: fixed;
   bottom: 0;
   display: flex;
   justify-content: center;
-  padding: 24px 0;
-  border-bottom: 1px solid colors.$GRAYE;
+  width: 100%;
+  height: sizes.$H_GNB;
+  background-color: colors.$WHITE;
+  border-top: 1px solid colors.$GRAYE;
 
   ul {
     display: flex;
-  }
-
-  li {
-    + li {
-      margin-left: 14px;
-    }
+    gap: 36px;
+    align-items: center;
   }
 
   a {
-    padding: 4px 14px;
-    color: colors.$GRAY2;
+    font-size: 18px;
+    font-weight: 600;
+    color: colors.$BLACK;
 
     &.isActive {
-      font-weight: 600;
+      @include gripColorText;
     }
   }
 }
