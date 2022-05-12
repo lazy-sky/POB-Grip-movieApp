@@ -1,8 +1,14 @@
-import styles from './searchPage.module.scss';
+import './searchPage.module.scss';
+
+import SearchBar from './SearchBar';
+import SearchResults from './SearchResults';
 
 const SearchPage = () => {
   return (
-    <div className={styles.container} />
+    <main>
+      <SearchBar />
+      <SearchResults />
+    </main>
   );
 };
 

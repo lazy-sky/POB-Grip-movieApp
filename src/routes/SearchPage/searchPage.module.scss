@@ -1,12 +1,9 @@
 @use '../../styles/constants/breakpoints';
 
-.container {
-  position: relative;
-}
-
-.main {
+main {
   position: fixed;
   top: 0;
   left: calc(50% - breakpoints.$MD / 2);
+  width: breakpoints.$MD;
   max-width: breakpoints.$MD;
 }
