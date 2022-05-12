@@ -1,0 +1,5 @@
+@mixin gripColorText {
+  background: linear-gradient(135deg, #ff008a, #ff462b);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
