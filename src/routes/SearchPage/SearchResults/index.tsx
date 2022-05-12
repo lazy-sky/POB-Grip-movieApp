@@ -1,5 +1,6 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { favoritesState, searchResults } from 'store/atoms';
+import { favoritesIdsState } from 'store/selectors';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { IMovie } from 'types/movie';
@@ -10,7 +11,7 @@ import styles from './searchResults.module.scss';
 const SearchResults = () => {
   const movies = useRecoilValue<IMovie[]>(searchResults);
   const [favorites, setFavorites] = useRecoilState<IMovie[]>(favoritesState);
-  const favoritesIds = favorites.map(({ imdbID }) => imdbID);
+  const favoritesIds = useRecoilValue(favoritesIdsState);
 
   const MySwal = withReactContent(Swal);
 
@@ -96,7 +97,6 @@ const SearchResults = () => {
         })}
       </ul>
       : <div style={{ marginTop: '20px' }}>검색 결과가 없습니다</div>
-
   );
 };
 
