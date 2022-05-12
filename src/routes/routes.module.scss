@@ -1,8 +1,10 @@
 @use '/src/styles/constants/colors';
 
 .app {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
   height: 100vh;
+}
+
+.pages {
+  padding: 48px 36px;
 }
