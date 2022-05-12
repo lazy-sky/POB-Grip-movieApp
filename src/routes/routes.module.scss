@@ -1,10 +1,12 @@
 @use '/src/styles/constants/colors';
+@use '/src/styles/constants/breakpoints';
 
 .app {
   position: relative;
-  height: 100vh;
+  min-width: calc(breakpoints.$MD - 1px);
 }
 
 .pages {
+  min-height: 100vh;
   padding: 48px 36px;
 }
