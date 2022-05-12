@@ -1,0 +1,53 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/constants/sizes';
+@import '/src/styles/mixins/text';
+
+.searchResults {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - sizes.$H_SEARCHBAR - sizes.$H_GNB);
+  overflow: scroll;
+  background-color: colors.$BLACK;
+
+  li {
+    border-bottom: 1px solid colors.$GRAY6;
+
+    &:hover {
+      @include gripColorText;
+    }
+
+    button {
+      display: flex;
+      color: colors.$WHITE;
+    }
+  }
+}
+
+.moviePoster {
+  width: 200px;
+  height: 300px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.movieInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 200px;
+  height: 300px;
+  padding: 20px;
+
+  h4 {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  div {
+    font-size: 16px;
+  }
+}
