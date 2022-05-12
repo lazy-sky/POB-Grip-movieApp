@@ -2,6 +2,10 @@
 
 영화를 검색하고 즐겨찾기로 등록할 수 있는 React 앱입니다.
 
+## Design Reference
+
+[그립 웹 사이트](https://www.grip.show/)
+
 ## Tech
 
 - typescript
