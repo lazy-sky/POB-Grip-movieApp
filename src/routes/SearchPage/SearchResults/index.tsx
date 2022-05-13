@@ -1,8 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { getMovies } from 'services/movie';
-import { favoritesState, searchKeywordState, searchResults } from 'store/atoms';
+import {
+  favoritesState,
+  pageState,
+  searchKeywordState,
+  searchResults
+} from 'store/atoms';
 import { favoritesIdsState } from 'store/selectors';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -16,28 +21,36 @@ const SearchResults = () => {
   const [favorites, setFavorites] = useRecoilState<IMovie[]>(favoritesState);
   const favoritesIds = useRecoilValue(favoritesIdsState);
   const keyword = useRecoilValue(searchKeywordState);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useRecoilState(pageState);
 
-  const { ref, inView, entry } = useInView({
+  const { ref, inView } = useInView({
     threshold: 1,
   });
 
-  useEffect(() => {
-    setPage((prev) => prev + 1);
+  const loadMoreMovies = useCallback(async () => {
+    const { Search } = await getMovies({ keyword, page: page + 1 });
 
+    if (!Search) return null;
+    if (!Search.length) {
+      // 더 이상 없는 경우
+      return null;
+    }
+
+    setMovies((prev) => [...prev, ...Search]);
+    return 1;
+  }, [keyword, page, setMovies]);
+
+  useEffect(() => {
     if (!inView) return;
 
     (async () => {
-      if (inView) {
-        const { Search } = await getMovies({ keyword, page });
-        if (Search) {
-          setMovies((prev) => [...prev, ...Search]);
-        }
-      }
+      if (inView) loadMoreMovies();
+
+      setTimeout(() => {
+        setPage((prev) => prev + 1);
+      }, 1000);
     })();
-  // memo: page를 의존성으로 넣으면 setPage가 원하지 않는 방식으로 동작하기 때문에 부득이하게 disale
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [entry, inView, keyword, setMovies]);
+  }, [inView, loadMoreMovies, setPage]);
 
   const MySwal = withReactContent(Swal);
 
