@@ -99,8 +99,9 @@ const SearchResults = () => {
           const { imdbID, Poster, Title, Year, Type } = movie;
           return (
             <li ref={ref} key={`movie-${imdbID}`}>
-              <button
-                type='button'
+              <div
+                role='button'
+                tabIndex={0}
                 onClick={() =>handleMovieClick(movie)}
               >
                 <div className={styles.moviePoster}>
@@ -115,7 +116,7 @@ const SearchResults = () => {
                   <div>{Type}</div>
                   {checkIsFavorite(imdbID) && <div>즐겨찾기에 추가된 영화입니다!</div>}
                 </div>
-              </button>
+              </div>
             </li>
           );
         })}

@@ -6,20 +6,23 @@
 .searchResults {
   display: flex;
   flex-direction: column;
+  gap: 40px;
   height: calc(100vh - positions.$MAIN_TOP - sizes.$H_SEARCHBAR - sizes.$H_GNB);
   overflow: scroll;
   background-color: colors.$BLACK;
 
-  li {
-    border-bottom: 1px solid colors.$GRAY6;
+  li > div {
+    display: flex;
+    color: colors.$WHITE;
+    background-color: colors.$GRAY2;
 
     &:hover {
       @include gripColorText;
-    }
+      cursor: pointer;
 
-    button {
-      display: flex;
-      color: colors.$WHITE;
+      img {
+        opacity: 0.5;
+      }
     }
   }
 }
