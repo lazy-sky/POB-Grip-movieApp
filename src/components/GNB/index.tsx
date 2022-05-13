@@ -9,7 +9,7 @@ const GNB = () => {
       <ul>
         <li>
           <NavLink
-            to='search'
+            to='/'
             className={({ isActive }) => cx({ [styles.isActive]: isActive })}
           >
             Search

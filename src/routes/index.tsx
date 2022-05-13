@@ -11,7 +11,6 @@ const App = () => {
       <div className={styles.pages}>
         <Routes>
           <Route path='/' element={<SearchPage />} />
-          <Route path='search' element={<SearchPage />} />
           <Route path='favorites' element={<FavoritesPage />} />
         </Routes>
       </div>
