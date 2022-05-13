@@ -1,4 +1,7 @@
+@import '/src/styles/mixins/text';
+
 .heading {
+  @include gripColorText;
   padding: 24px;
   font-size: 36px;
   font-weight: 700;
