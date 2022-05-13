@@ -1,13 +1,15 @@
-import React from 'react';
-import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil';
+import React, { useState } from 'react';
+import { useResetRecoilState, useSetRecoilState } from 'recoil';
 import { getMovies } from 'services/movie';
-import { searchKeywordState, searchResults } from 'store/atoms';
+import { pageState, searchKeywordState, searchResults } from 'store/atoms';
 import { IMovie } from 'types/movie';
 
 import styles from './searchBar.module.scss';
 
 const SearchBar = () => {
-  const [inputValue, setInputValue] = useRecoilState(searchKeywordState);
+  const [inputValue, setInputValue] = useState('');
+  const setKeyword = useSetRecoilState(searchKeywordState);
+  const resetPage = useResetRecoilState(pageState);
   const setMovies = useSetRecoilState<IMovie[]>(searchResults);
   const clearMovies = useResetRecoilState(searchResults);
 
@@ -18,9 +20,14 @@ const SearchBar = () => {
   const handleSearchSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     clearMovies();
-    // TODO: pagination with scroll action
+    resetPage();
     const { Search } = await getMovies({ keyword: inputValue, page: 1 });
+
+    if (!Search) return;
+
     setMovies(Search);
+    setKeyword(inputValue);
+    resetPage();
   };
 
   return (
