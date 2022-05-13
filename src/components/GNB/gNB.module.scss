@@ -1,13 +1,15 @@
 @use '/src/styles/constants/colors';
 @use '/src/styles/constants/sizes';
+@use '/src/styles/constants/breakpoints';
 @import '/src/styles/mixins/text';
 
 .gnb {
   position: fixed;
   bottom: 0;
+  left: calc(50% - breakpoints.$MD / 2);
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: breakpoints.$MD;
   height: sizes.$H_GNB;
   background-color: colors.$WHITE;
   border-top: 1px solid colors.$GRAYE;
