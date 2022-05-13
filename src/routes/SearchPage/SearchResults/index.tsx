@@ -23,19 +23,20 @@ const SearchResults = () => {
   });
 
   useEffect(() => {
-    // TODO: 왜 첫 페이지는 두 번 렌더링하는가...
-    if (page === 1) {
-      setPage((prev) => prev + 1);
-      return;
-    }
+    setPage((prev) => prev + 1);
+
+    if (!inView) return;
 
     (async () => {
       if (inView) {
-        setPage((prev) => prev + 1);
         const { Search } = await getMovies({ keyword, page });
-        setMovies(prev => [...prev, ...Search]);
+        if (Search) {
+          setMovies((prev) => [...prev, ...Search]);
+        }
       }
     })();
+  // memo: page를 의존성으로 넣으면 setPage가 원하지 않는 방식으로 동작하기 때문에 부득이하게 disale
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [entry, inView, keyword, setMovies]);
 
   const MySwal = withReactContent(Swal);
@@ -46,8 +47,7 @@ const SearchResults = () => {
 
   const handleMovieClick = (movie: IMovie) => {
     const isAlreadySaved = favorites
-      .filter(({ imdbID }) => movie.imdbID === imdbID)
-      .length;
+      .filter(({ imdbID }) => movie.imdbID === imdbID).length;
 
     if (isAlreadySaved) {
       MySwal.fire({
@@ -57,15 +57,11 @@ const SearchResults = () => {
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#dd3333',
         confirmButtonText: '제거',
-        cancelButtonText: '취소'
+        cancelButtonText: '취소',
       }).then(({ isConfirmed }) => {
         if (isConfirmed) {
           setFavorites(favorites.filter(({ imdbID }) => movie.imdbID !== imdbID));
-          MySwal.fire(
-            'Deleted!',
-            'This movie is removed from your Favorites',
-            'success'
-          );
+          MySwal.fire('Deleted!', 'This movie is removed from your Favorites', 'success');
         }
       });
 
@@ -79,49 +75,41 @@ const SearchResults = () => {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: '추가',
-      cancelButtonText: '취소'
+      cancelButtonText: '취소',
     }).then(({ isConfirmed }) => {
       if (isConfirmed) {
         setFavorites((prev: IMovie[]) => [movie, ...prev]);
-        MySwal.fire(
-          'Added!',
-          'You can see this movie in yout Favoirtes.',
-          'success'
-        );
+        MySwal.fire('Added!', 'You can see this movie in yout Favoirtes.', 'success');
       }
     });
   };
 
-  return (
-    movies && movies.length > 0
-      ? <ul className={styles.searchResults}>
-        {movies?.map((movie) => {
-          const { imdbID, Poster, Title, Year, Type } = movie;
-          return (
-            <li ref={ref} key={`movie-${imdbID}`}>
-              <div
-                role='button'
-                tabIndex={0}
-                onClick={() =>handleMovieClick(movie)}
-              >
-                <div className={styles.moviePoster}>
-                  {Poster === 'N/A'
-                    ? <img src={NoImage} alt={Title} />
-                    : <img src={Poster} alt={Title} />
-                  }
-                </div>
-                <div className={styles.movieInfo}>
-                  <h4>{Title}</h4>
-                  <div>{Year}</div>
-                  <div>{Type}</div>
-                  {checkIsFavorite(imdbID) && <div>즐겨찾기에 추가된 영화입니다!</div>}
-                </div>
+  return movies && movies.length > 0 ? (
+    <ul className={styles.searchResults}>
+      {movies?.map((movie) => {
+        const { imdbID, Poster, Title, Year, Type } = movie;
+        return (
+          <li ref={ref} key={`movie-${imdbID}`}>
+            <div role='button' tabIndex={0} onClick={() => handleMovieClick(movie)}>
+              <div className={styles.moviePoster}>
+                {Poster === 'N/A'
+                  ? <img src={NoImage} alt={Title} />
+                  : <img src={Poster} alt={Title} />
+                }
               </div>
-            </li>
-          );
-        })}
-      </ul>
-      : <div style={{ marginTop: '20px' }}>검색 결과가 없습니다</div>
+              <div className={styles.movieInfo}>
+                <h4>{Title}</h4>
+                <div>{Year}</div>
+                <div>{Type}</div>
+                {checkIsFavorite(imdbID) && <div>즐겨찾기에 추가된 영화입니다!</div>}
+              </div>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  ) : (
+    <div style={{ marginTop: '20px' }}>검색 결과가 없습니다</div>
   );
 };
 
