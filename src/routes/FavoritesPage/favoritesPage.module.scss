@@ -6,20 +6,22 @@
 .favorites {
   display: flex;
   flex-direction: column;
+  gap: 40px;
   height: calc(100vh - positions.$MAIN_TOP - sizes.$H_GNB);
   overflow: scroll;
   background-color: colors.$BLACK;
 
-  li {
-    border-bottom: 1px solid colors.$GRAY6;
+  li > div {
+    display: flex;
+    color: colors.$WHITE;
+    background-color: colors.$GRAY2;
 
     &:hover {
       @include gripColorText;
-    }
 
-    button {
-      display: flex;
-      color: colors.$WHITE;
+      img {
+        opacity: 0.5;
+      }
     }
   }
 }
@@ -27,6 +29,8 @@
 .moviePoster {
   width: 200px;
   height: 300px;
+  padding: 16px;
+  background-color: colors.$WHITE;
 
   img {
     width: 100%;
@@ -41,7 +45,7 @@
   justify-content: space-around;
   width: 200px;
   height: 300px;
-  padding: 20px;
+  padding: 24px 28px;
 
   h4 {
     font-size: 24px;

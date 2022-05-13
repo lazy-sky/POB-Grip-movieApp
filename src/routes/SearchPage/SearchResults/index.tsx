@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { getMovies } from 'services/movie';
@@ -19,7 +19,6 @@ const SearchResults = () => {
   const [page, setPage] = useState(1);
 
   const { ref, inView, entry } = useInView({
-    /* Optional options */
     threshold: 1,
   });
 
@@ -96,32 +95,30 @@ const SearchResults = () => {
   return (
     movies && movies.length > 0
       ? <ul className={styles.searchResults}>
-        <Suspense fallback={<h1>Loading profile...</h1>}>
-          {movies?.map((movie) => {
-            const { imdbID, Poster, Title, Year, Type } = movie;
-            return (
-              <li ref={ref} key={`movie-${imdbID}`}>
-                <button
-                  type='button'
-                  onClick={() =>handleMovieClick(movie)}
-                >
-                  <div className={styles.moviePoster}>
-                    {Poster === 'N/A'
-                      ? <img src={NoImage} alt={Title} />
-                      : <img src={Poster} alt={Title} />
-                    }
-                  </div>
-                  <div className={styles.movieInfo}>
-                    <h4>{Title}</h4>
-                    <div>{Year}</div>
-                    <div>{Type}</div>
-                    {checkIsFavorite(imdbID) && <div>즐겨찾기에 추가된 영화입니다!</div>}
-                  </div>
-                </button>
-              </li>
-            );
-          })}
-        </Suspense>
+        {movies?.map((movie) => {
+          const { imdbID, Poster, Title, Year, Type } = movie;
+          return (
+            <li ref={ref} key={`movie-${imdbID}`}>
+              <button
+                type='button'
+                onClick={() =>handleMovieClick(movie)}
+              >
+                <div className={styles.moviePoster}>
+                  {Poster === 'N/A'
+                    ? <img src={NoImage} alt={Title} />
+                    : <img src={Poster} alt={Title} />
+                  }
+                </div>
+                <div className={styles.movieInfo}>
+                  <h4>{Title}</h4>
+                  <div>{Year}</div>
+                  <div>{Type}</div>
+                  {checkIsFavorite(imdbID) && <div>즐겨찾기에 추가된 영화입니다!</div>}
+                </div>
+              </button>
+            </li>
+          );
+        })}
       </ul>
       : <div style={{ marginTop: '20px' }}>검색 결과가 없습니다</div>
   );
