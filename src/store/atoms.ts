@@ -9,6 +9,11 @@ export const searchKeywordState = atom({
   default: ''
 });
 
+export const pageState = atom({
+  key: 'page',
+  default: 1
+});
+
 /* TODO: 이해할 수 없는 타입 문제 발생
 Type 'RecoilState<never[]>' is not assignable to type 'RecoilState<IMovie[]>'.
   Types of property '__cTag' are incompatible.
