@@ -1,5 +1,6 @@
 @use '/src/styles/constants/colors';
 @use '/src/styles/constants/breakpoints';
+@use '/src/styles/constants/positions';
 
 .app {
   position: relative;
@@ -11,4 +12,12 @@
 
 .pages {
   padding: 48px 36px;
+}
+
+main {
+  position: fixed;
+  top: positions.$MAIN_TOP;
+  left: calc(50% - breakpoints.$MD / 2);
+  width: breakpoints.$MD;
+  max-width: breakpoints.$MD;
 }

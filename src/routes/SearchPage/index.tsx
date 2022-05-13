@@ -1,14 +1,17 @@
-import './searchPage.module.scss';
+import PageTitle from 'components/PageTitle';
 
 import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
 
 const SearchPage = () => {
   return (
-    <main>
-      <SearchBar />
-      <SearchResults />
-    </main>
+    <>
+      <PageTitle title="영화 검색"/>
+      <main>
+        <SearchBar />
+        <SearchResults />
+      </main>
+    </>
   );
 };
 

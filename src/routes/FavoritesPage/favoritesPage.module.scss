@@ -1,11 +1,12 @@
 @use '/src/styles/constants/colors';
 @use '/src/styles/constants/sizes';
+@use '/src/styles/constants/positions';
 @import '/src/styles/mixins/text';
 
 .favorites {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - sizes.$H_GNB);
+  height: calc(100vh - positions.$MAIN_TOP - sizes.$H_GNB);
   overflow: scroll;
   background-color: colors.$BLACK;
 
