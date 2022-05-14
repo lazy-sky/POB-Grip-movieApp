@@ -32,7 +32,7 @@ export const getMovies = async ({ keyword, page }: Params) => {
 
   // memo: 영화가 중복으로 나오는 결과가 존재. 대체 왜...
   // e.g., resort로 검색시
-  if (!Search) {
+  if (Search) {
     const uniq = Search.reduce((acc: IMovie[], cur: IMovie) => {
       if (acc.findIndex(({ imdbID }) => imdbID === cur.imdbID) === -1) {
         acc.push(cur);
