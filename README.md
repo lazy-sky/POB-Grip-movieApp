@@ -34,6 +34,75 @@ https://movie-app-lazy-sky.vercel.app
 
 ![rate](https://user-images.githubusercontent.com/47808461/168449774-94145c3f-bab8-48ba-a82a-11e70426969b.gif)
 
+## Project Tree
+
+📦src
+ ┣ 📂assets
+ ┃ ┗ 📂images
+ ┃ ┃ ┗ 📜no-image.jpg
+ ┣ 📂components
+ ┃ ┣ 📂AlertModal
+ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┣ 📂GNB
+ ┃ ┃ ┣ 📜gNB.module.scss
+ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┣ 📂LoadingSpinner
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜loadingSpinner.module.scss
+ ┃ ┣ 📂NoMovie
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜noMovie.module.scss
+ ┃ ┗ 📂PageTitle
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜pageTitle.module.scss
+ ┣ 📂hooks
+ ┣ 📂routes
+ ┃ ┣ 📂FavoritesPage
+ ┃ ┃ ┣ 📂Favorites
+ ┃ ┃ ┃ ┣ 📂FavoriteItem
+ ┃ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┃ ┣ 📜favorites.module.scss
+ ┃ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┣ 📂SearchPage
+ ┃ ┃ ┣ 📂SearchBar
+ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┗ 📜searchBar.module.scss
+ ┃ ┃ ┣ 📂SearchResults
+ ┃ ┃ ┃ ┣ 📂MovieItem
+ ┃ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┃ ┗ 📜movieItem.module.scss
+ ┃ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┃ ┗ 📜searchResults.module.scss
+ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┣ 📜index.tsx
+ ┃ ┗ 📜routes.module.scss
+ ┣ 📂services
+ ┃ ┗ 📜movie.ts
+ ┣ 📂store
+ ┃ ┣ 📜atoms.ts
+ ┃ ┗ 📜selectors.ts
+ ┣ 📂styles
+ ┃ ┣ 📂base
+ ┃ ┃ ┣ 📜_fonts.scss
+ ┃ ┃ ┣ 📜_more.scss
+ ┃ ┃ ┗ 📜_reset.scss
+ ┃ ┣ 📂constants
+ ┃ ┃ ┣ 📜_breakpoints.scss
+ ┃ ┃ ┣ 📜_colors.scss
+ ┃ ┃ ┣ 📜_levels.scss
+ ┃ ┃ ┣ 📜_positions.scss
+ ┃ ┃ ┗ 📜_sizes.scss
+ ┃ ┣ 📂mixins
+ ┃ ┃ ┗ 📜_text.scss
+ ┃ ┣ 📜index.js
+ ┃ ┗ 📜index.scss
+ ┣ 📂types
+ ┃ ┗ 📜movie.ts
+ ┣ 📜index.tsx
+ ┣ 📜react-app-env.d.ts
+ ┗ 📜reportWebVitals.ts
+
 ## Design Reference
 
 [그립 웹 사이트](https://www.grip.show/)
