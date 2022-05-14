@@ -1,13 +1,13 @@
 import { SetterOrUpdater } from 'recoil';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { IMovie } from 'types/movie';
+import { IFavorite } from 'types/movie';
 
 interface IProps {
-  movie: IMovie
+  movie: IFavorite
   isAlreadySaved: boolean
-  favorites: IMovie[],
-  setFavorites: SetterOrUpdater<IMovie[]>
+  favorites: IFavorite[],
+  setFavorites: SetterOrUpdater<IFavorite[]>
 }
 
 const MySwal = withReactContent(Swal);
@@ -50,7 +50,7 @@ const fireAlertModal = ({
     cancelButtonText: '취소',
   }).then(({ isConfirmed }) => {
     if (isConfirmed) {
-      setFavorites((prev: IMovie[]) => [movie, ...prev]);
+      setFavorites((prev: IFavorite[]) => [movie, ...prev]);
       MySwal.fire({
         title: '즐겨찾기에 추가되었습니다!',
         icon: 'success',

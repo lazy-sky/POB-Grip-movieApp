@@ -11,14 +11,14 @@ import {
   searchResults
 } from 'store/atoms';
 import { favoritesIdsState } from 'store/selectors';
-import { IMovie } from 'types/movie';
+import { IFavorite, IMovie } from 'types/movie';
 
 import NoImage from '../../../assets/images/no-image.jpg';
 import styles from './searchResults.module.scss';
 
 const SearchResults = () => {
   const [movies, setMovies] = useRecoilState<IMovie[]>(searchResults);
-  const [favorites, setFavorites] = useRecoilState<IMovie[]>(favoritesState);
+  const [favorites, setFavorites] = useRecoilState<IFavorite[]>(favoritesState);
   const favoritesIds = useRecoilValue(favoritesIdsState);
   const keyword = useRecoilValue(searchKeywordState);
   const [page, setPage] = useRecoilState(pageState);
@@ -60,7 +60,12 @@ const SearchResults = () => {
     const isAlreadySaved = !!favorites
       .filter(({ imdbID }) => movie.imdbID === imdbID).length;
 
-    fireAlertModal({movie, isAlreadySaved, favorites, setFavorites});
+    fireAlertModal({
+      movie: { ...movie, ratingStar: 0 },
+      isAlreadySaved,
+      favorites,
+      setFavorites
+    });
   };
 
   return movies && movies.length > 0 ? (

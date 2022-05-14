@@ -3,19 +3,19 @@ import NoMovie from 'components/NoMovie';
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
 import { useRecoilState } from 'recoil';
 import { favoritesState } from 'store/atoms';
-import { IMovie } from 'types/movie';
+import { IFavorite, IMovie } from 'types/movie';
 
 import NoImage from '../../../assets/images/no-image.jpg';
 import styles from './favorites.module.scss';
 
 const Favorites = () => {
-  const [favorites, setFavorites] = useRecoilState<IMovie[]>(favoritesState);
+  const [favorites, setFavorites] = useRecoilState<IFavorite[]>(favoritesState);
 
   const reorder = (
-    list: IMovie[],
+    list: IFavorite[],
     startIndex: number,
     endIndex: number
-  ): IMovie[] => {
+  ): IFavorite[] => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
@@ -29,7 +29,7 @@ const Favorites = () => {
     if (!destination) return;
     if (destination.index === source.index) return;
 
-    const reordered: IMovie[] = reorder(
+    const reordered: IFavorite[] = reorder(
       favorites,
       source.index,
       destination.index
@@ -40,11 +40,29 @@ const Favorites = () => {
 
   const handleMovieClick = (movie: IMovie) => {
     fireAlertModal({
-      movie,
+      movie: { ...movie, ratingStar: 0 },
       isAlreadySaved: true,
       favorites,
       setFavorites
     });
+  };
+
+  const handleStarUpClick = (event: any, id: string) => {
+    event.stopPropagation();
+
+    setFavorites(favorites.map((movie) => movie.imdbID === id
+      ? { ...movie, ratingStar: Math.min(movie.ratingStar + 1, 5)}
+      : movie
+    ));
+  };
+
+  const handleStarDownClick = (event: any, id: string) => {
+    event.stopPropagation();
+
+    setFavorites(favorites.map((movie) => movie.imdbID === id
+      ? { ...movie, ratingStar: Math.max(movie.ratingStar - 1, 0)}
+      : movie
+    ));
   };
 
   return (
@@ -58,7 +76,7 @@ const Favorites = () => {
               className={styles.favorites}
             >
               {favorites.map((movie, index) => {
-                const { imdbID, Poster, Title, Year, Type } = movie;
+                const { imdbID, Poster, Title, Year, Type, ratingStar } = movie;
                 return (
                   <Draggable
                     key={`movie-${imdbID}`}
@@ -87,6 +105,24 @@ const Favorites = () => {
                             <h4>{Title}</h4>
                             <div>{Year}</div>
                             <div>{Type}</div>
+                            <div className={styles.movieRating}>
+                              <button
+                                type='button'
+                                onClick={(event) => handleStarUpClick(event, imdbID)}
+                              >
+                                ↑
+                              </button>
+                              <div>
+                                <div>★</div>
+                                <div>{ratingStar}</div>
+                              </div>
+                              <button
+                                type='button'
+                                onClick={(event) => handleStarDownClick(event, imdbID)}
+                              >
+                                ↓
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </li>

@@ -45,7 +45,7 @@
   justify-content: space-around;
   width: 200px;
   height: 300px;
-  padding: 24px 28px;
+  padding: 24px 20px;
 
   h4 {
     font-size: 24px;
@@ -54,5 +54,24 @@
 
   div {
     font-size: 16px;
+  }
+}
+
+.movieRating {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    padding: 4px;
+    font-size: 18px;
+  }
+
+  button {
+    padding: 12px;
+    font-size: 24px;
+    color: inherit;
   }
 }

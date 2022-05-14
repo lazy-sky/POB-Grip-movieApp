@@ -1,6 +1,6 @@
 import { atom, RecoilState } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
-import { IMovie } from 'types/movie';
+import { IFavorite } from 'types/movie';
 
 const { persistAtom } = recoilPersist();
 
@@ -27,7 +27,7 @@ export const searchResults: any = atom({
   default: []
 });
 
-export const favoritesState: RecoilState<IMovie[]> = atom({
+export const favoritesState: RecoilState<IFavorite[]> = atom({
   key: 'gripFavorites',
   default: [],
   effects: [persistAtom]

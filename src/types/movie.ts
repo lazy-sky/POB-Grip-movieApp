@@ -5,3 +5,7 @@ export interface IMovie {
   Type: string
   Poster: string
 }
+
+export interface IFavorite extends IMovie {
+  ratingStar: number
+}
