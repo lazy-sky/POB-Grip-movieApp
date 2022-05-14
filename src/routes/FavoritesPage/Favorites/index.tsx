@@ -1,4 +1,5 @@
 import fireAlertModal from 'components/AlertModal';
+import NoMovie from 'components/NoMovie';
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
 import { useRecoilState } from 'recoil';
 import { favoritesState } from 'store/atoms';
@@ -98,7 +99,7 @@ const Favorites = () => {
           )}
         </Droppable>
       </DragDropContext>
-      : <div style={{ marginTop: '20px' }}>즐겨찾기가 없습니다</div>
+      : <NoMovie message="즐겨찾기 등록된 영화가 없습니다." />
   );
 };
 

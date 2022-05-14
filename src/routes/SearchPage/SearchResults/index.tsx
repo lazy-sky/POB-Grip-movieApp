@@ -1,4 +1,5 @@
 import fireAlertModal from 'components/AlertModal';
+import NoMovie from 'components/NoMovie';
 import { useCallback, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -87,7 +88,7 @@ const SearchResults = () => {
       })}
     </ul>
   ) : (
-    <div className={styles.noResults}>검색 결과가 없습니다.</div>
+    <NoMovie message="검색 결과가 없습니다." />
   );
 };
 
