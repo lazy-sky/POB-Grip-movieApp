@@ -3,12 +3,15 @@
 @use '/src/styles/constants/positions';
 @use '/src/styles/constants/sizes';
 
+body {
+  background: linear-gradient(135deg, #ff008a, #ff462b);
+}
+
 .app {
   position: relative;
   min-width: breakpoints.$MD;
   min-height: 100vh;
   color: colors.$WHITE;
-  background: linear-gradient(135deg, #ff008a, #ff462b);
 }
 
 .pages {
@@ -17,4 +20,11 @@
   min-width: breakpoints.$MD;
   height: calc(100vh - sizes.$H_GNB);
   background-color: colors.$BLACK;
+}
+
+@media only screen and (min-width: breakpoints.$LG) {
+  .app {
+    background-image: url('../../public/images/model.png');
+    background-repeat: no-repeat;
+  }
 }
