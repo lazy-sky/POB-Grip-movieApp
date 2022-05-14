@@ -10,6 +10,11 @@ import Routes from './routes';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
+  /*
+    memo: react-beautiful-dnd의 이슈로 인해 development mode에서는
+    StrictMode를 해제해야 드래그 앤 드롭 기능이 정상적으로 작동한다.
+    production mode에선 문제가 없으니 개발 작업 중에만 StrictMode를 해제하면 된다.
+  */
   <React.StrictMode>
     <RecoilRoot>
       <BrowserRouter>
