@@ -44,7 +44,7 @@ const MovieItem = ({ movie }: {
         <h4>{Title}</h4>
         <div>{Year}</div>
         <div>{Type}</div>
-        {checkIsFavorite(imdbID) && <div>즐겨찾기에 추가된 영화입니다!</div>}
+        {checkIsFavorite(imdbID) && <div className={styles.mark}>🔖</div>}
       </div>
     </div>
   );
