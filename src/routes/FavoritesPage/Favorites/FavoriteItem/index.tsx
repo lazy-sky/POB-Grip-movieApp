@@ -4,7 +4,7 @@ import { favoritesState } from 'store/atoms';
 import { IFavorite } from 'types/movie';
 
 import NoImage from '../../../../assets/images/no-image.jpg';
-import styles from './favoriteItem.module.scss';
+import styles from '../../../SearchPage/SearchResults/MovieItem/movieItem.module.scss';
 
 const FavoriteItem = ({ movie }: {
   movie: IFavorite

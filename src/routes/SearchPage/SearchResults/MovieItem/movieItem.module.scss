@@ -7,10 +7,10 @@ div[role='button'] {
   display: flex;
   color: colors.$WHITE;
   background-color: colors.$GRAY2;
+  border-top: 2px solid colors.$BLACK;
 
   &:hover {
     @include gripColorText;
-    cursor: pointer;
 
     img {
       opacity: 0.5;
@@ -21,6 +21,8 @@ div[role='button'] {
 .moviePoster {
   width: 200px;
   height: 300px;
+  padding: 16px;
+  background-color: colors.$WHITE;
 
   img {
     width: 100%;
@@ -44,5 +46,32 @@ div[role='button'] {
 
   div {
     font-size: 16px;
+  }
+}
+
+.movieRating {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  gap: 8px;
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    padding: 4px;
+    font-size: 18px;
+  }
+
+  button {
+    padding: 12px;
+    font-size: 24px;
+    color: inherit;
+    border: 1px solid colors.$GRAY2;
+    border-radius: 100%;
+
+    &:hover {
+      color: colors.$BLACK;
+      border-color: colors.$WHITE;
+    }
   }
 }
