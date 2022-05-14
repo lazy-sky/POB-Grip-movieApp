@@ -47,7 +47,10 @@ const Favorites = () => {
     });
   };
 
-  const handleStarUpClick = (event: any, id: string) => {
+  const handleStarUpClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    id: string
+  ) => {
     event.stopPropagation();
 
     setFavorites(favorites.map((movie) => movie.imdbID === id
@@ -56,7 +59,10 @@ const Favorites = () => {
     ));
   };
 
-  const handleStarDownClick = (event: any, id: string) => {
+  const handleStarDownClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    id: string
+  ) => {
     event.stopPropagation();
 
     setFavorites(favorites.map((movie) => movie.imdbID === id
