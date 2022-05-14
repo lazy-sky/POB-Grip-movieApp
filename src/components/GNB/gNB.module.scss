@@ -25,6 +25,7 @@
     font-weight: 600;
     color: colors.$BLACK;
 
+    &:hover,
     &.isActive {
       @include gripColorText;
     }
