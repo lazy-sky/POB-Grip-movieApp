@@ -1,7 +1,9 @@
+import LoadingSpinner from 'components/LoadingSpinner';
 import React, { useState } from 'react';
-import { useResetRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { getMovies } from 'services/movie';
-import { pageState, searchKeywordState, searchResults } from 'store/atoms';
+import { isLoadingState, pageState, searchKeywordState, searchResults }
+  from 'store/atoms';
 import { IMovie } from 'types/movie';
 
 import styles from './searchBar.module.scss';
@@ -10,6 +12,7 @@ const SearchBar = () => {
   const [inputValue, setInputValue] = useState('');
   const setKeyword = useSetRecoilState(searchKeywordState);
   const resetPage = useResetRecoilState(pageState);
+  const [isLoading, setIsLoading] = useRecoilState(isLoadingState);
   const setMovies = useSetRecoilState<IMovie[]>(searchResults);
   const clearMovies = useResetRecoilState(searchResults);
 
@@ -21,7 +24,9 @@ const SearchBar = () => {
     e.preventDefault();
     clearMovies();
     resetPage();
+    setIsLoading(true);
     const { Search } = await getMovies({ keyword: inputValue, page: 1 });
+    setIsLoading(false);
 
     if (!Search) return;
 
@@ -41,6 +46,7 @@ const SearchBar = () => {
         />
         <button type="submit">검색</button>
       </form>
+      {isLoading && <LoadingSpinner />}
     </div>
   );
 };
