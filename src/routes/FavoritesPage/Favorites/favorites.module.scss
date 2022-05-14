@@ -59,7 +59,8 @@
 
 .movieRating {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 2fr;
+  gap: 8px;
 
   div {
     display: flex;
@@ -73,5 +74,12 @@
     padding: 12px;
     font-size: 24px;
     color: inherit;
+    border: 1px solid colors.$GRAY2;
+    border-radius: 100%;
+
+    &:hover {
+      color: colors.$BLACK;
+      border-color: colors.$WHITE;
+    }
   }
 }
