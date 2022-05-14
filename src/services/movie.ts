@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { IMovie } from 'types/movie';
 
-const BASE_URL = 'http://www.omdbapi.com';
-
 interface Params {
   keyword: string
   page: number
@@ -16,9 +14,15 @@ interface Params {
   - 그래서 컴포넌트 파일 내에서 에러 처리
 */
 export const getMovies = async ({ keyword, page }: Params) => {
-  const { data } = await axios.get(`
-    ${BASE_URL}/?apikey=${process.env.REACT_APP_MOVIE_APP_ID}&s=${keyword}&page=${page}
-  `);
+  const { data } = await axios({
+    method: 'GET',
+    url: process.env.REACT_APP_API_URL,
+    params: {
+      apikey: process.env.REACT_APP_MOVIE_APP_ID,
+      s: keyword,
+      page,
+    },
+  });
 
   const { Search, Response } = data;
 
