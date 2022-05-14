@@ -14,7 +14,9 @@ const App = () => {
           <Route path='favorites' element={<FavoritesPage />} />
         </Routes>
       </div>
-      <GNB />
+      <footer>
+        <GNB />
+      </footer>
     </div>
   );
 };
