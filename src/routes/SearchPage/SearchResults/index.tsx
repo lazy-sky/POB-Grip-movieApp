@@ -30,25 +30,25 @@ const SearchResults = () => {
   const loadMoreMovies = useCallback(async () => {
     const { Search } = await getMovies({ keyword, page: page + 1 });
 
-    if (!Search) return null;
-    if (!Search.length) {
-      // 더 이상 없는 경우
-      return null;
-    }
+    if (!Search || !Search.length) return null;
 
     setMovies((prev) => [...prev, ...Search]);
-    return 1;
+
+    return Search;
   }, [keyword, page, setMovies]);
 
   useEffect(() => {
     if (!inView) return;
 
     (async () => {
-      if (inView) loadMoreMovies();
+      if (inView) {
+        const newMovies = await loadMoreMovies();
+        if (!newMovies || !newMovies.length) return;
+      }
 
       setTimeout(() => {
         setPage((prev) => prev + 1);
-      }, 1000);
+      }, 300);
     })();
   }, [inView, loadMoreMovies, setPage]);
 

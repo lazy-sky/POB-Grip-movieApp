@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { IMovie } from 'types/movie';
 
 const BASE_URL = 'http://www.omdbapi.com';
 
@@ -19,10 +20,22 @@ export const getMovies = async ({ keyword, page }: Params) => {
     ${BASE_URL}/?apikey=${process.env.REACT_APP_MOVIE_APP_ID}&s=${keyword}&page=${page}
   `);
 
-  const { Response } = data;
+  const { Search, Response } = data;
 
   if (Response === 'False') {
     return { Search: [] };
+  }
+
+  // memo: 영화가 중복으로 나오는 결과가 존재. 대체 왜...
+  // e.g., resort로 검색시
+  if (!Search) {
+    const uniq = Search.reduce((acc: IMovie[], cur: IMovie) => {
+      if (acc.findIndex(({ imdbID }) => imdbID === cur.imdbID) === -1) {
+        acc.push(cur);
+      }
+      return acc;
+    }, []);
+    return { ...data, Search: uniq };
   }
 
   return data;
