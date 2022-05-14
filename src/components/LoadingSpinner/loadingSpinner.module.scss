@@ -1,0 +1,28 @@
+@use '/src/styles/constants/colors';
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loadingSpinner {
+  position: fixed;
+  top: 40vh;
+  width: 64px;
+  height: 64px;
+  border: 8px solid colors.$PINK;
+  border-top: 8px solid colors.$GRAY3;
+  border-radius: 100%;
+  animation: spinner 1s linear infinite;
+}
