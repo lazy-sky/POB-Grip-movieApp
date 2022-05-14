@@ -122,7 +122,7 @@ const SearchResults = () => {
       })}
     </ul>
   ) : (
-    <div style={{ marginTop: '20px' }}>검색 결과가 없습니다</div>
+    <div className={styles.noResults}>검색 결과가 없습니다.</div>
   );
 };
 
