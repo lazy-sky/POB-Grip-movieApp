@@ -4,7 +4,7 @@
 
 ## Deploy
 
-https://movie-app-lazy-sky.vercel.app/favorites
+https://movie-app-lazy-sky.vercel.app
 
 ## Design Reference
 
@@ -18,9 +18,14 @@ https://movie-app-lazy-sky.vercel.app/favorites
 - typescript
 - react v18
 - react-beautiful-dnd
+  - Drag & Drop feature
 - react-intersection-observer
+  - Infinite scroll feature
 - react-router-dom
 - react-use
 - recoil
+- recoil-persist
+  - localStorage
 - scss
 - sweetalert2
+  - modal
