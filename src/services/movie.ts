@@ -14,9 +14,7 @@ interface Params {
   - 그래서 컴포넌트 파일 내에서 에러 처리
 */
 export const getMovies = async ({ keyword, page }: Params) => {
-  const { data } = await axios({
-    method: 'GET',
-    url: process.env.REACT_APP_API_URL,
+  const { data } = await axios.get(process.env.REACT_APP_API_URL || '', {
     params: {
       apikey: process.env.REACT_APP_MOVIE_APP_ID,
       s: keyword,
