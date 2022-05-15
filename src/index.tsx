@@ -15,13 +15,13 @@ root.render(
     StrictMode를 해제해야 드래그 앤 드롭 기능이 정상적으로 작동한다.
     production mode에선 문제가 없으니 개발 작업 중에만 StrictMode를 해제하면 된다.
   */
-  <React.StrictMode>
-    <RecoilRoot>
-      <BrowserRouter>
-        <Routes />
-      </BrowserRouter>
-    </RecoilRoot>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <RecoilRoot>
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
+  </RecoilRoot>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
