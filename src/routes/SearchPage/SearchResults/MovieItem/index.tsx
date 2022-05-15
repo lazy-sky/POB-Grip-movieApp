@@ -1,10 +1,11 @@
+import NoImage from 'assets/images/no-image.jpg';
 import fireAlertModal from 'components/AlertModal';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { favoritesState } from 'store/atoms';
 import { favoritesIdsState } from 'store/selectors';
 import { IFavorite, IMovie } from 'types/movie';
+import { handleImgError } from 'utils/image';
 
-import NoImage from '../../../../assets/images/no-image.jpg';
 import styles from './movieItem.module.scss';
 
 const MovieItem = ({ movie }: {
@@ -35,10 +36,7 @@ const MovieItem = ({ movie }: {
   return (
     <div role='button' tabIndex={0} onClick={() => handleMovieClick(movie)}>
       <div className={styles.moviePoster}>
-        {Poster === 'N/A'
-          ? <img src={NoImage} alt={Title} />
-          : <img src={Poster} alt={Title} />
-        }
+        <img src={Poster} alt={Title} onError={(e) => handleImgError(e, NoImage)}/>
       </div>
       <div className={styles.movieInfo}>
         <h4>{Title}</h4>

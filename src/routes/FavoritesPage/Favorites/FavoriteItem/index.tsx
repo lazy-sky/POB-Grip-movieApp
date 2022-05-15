@@ -1,9 +1,11 @@
+import NoImage from 'assets/images/no-image.jpg';
 import fireAlertModal from 'components/AlertModal';
+import React from 'react';
 import { useRecoilState } from 'recoil';
 import { favoritesState } from 'store/atoms';
 import { IFavorite } from 'types/movie';
+import { handleImgError } from 'utils/image';
 
-import NoImage from '../../../../assets/images/no-image.jpg';
 import styles from '../../../SearchPage/SearchResults/MovieItem/movieItem.module.scss';
 
 const FavoriteItem = ({ movie }: {
@@ -53,10 +55,7 @@ const FavoriteItem = ({ movie }: {
       onClick={() =>handleMovieClick(movie)}
     >
       <div className={styles.moviePoster}>
-        {Poster === 'N/A'
-          ? <img src={NoImage} alt={Title} />
-          : <img src={Poster} alt={Title} />
-        }
+        <img src={Poster} alt={Title} onError={(e) => handleImgError(e, NoImage)} />
       </div>
       <div className={styles.movieInfo}>
         <h4>{Title}</h4>
