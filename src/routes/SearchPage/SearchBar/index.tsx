@@ -2,7 +2,7 @@ import LoadingSpinner from 'components/LoadingSpinner';
 import React, { useState } from 'react';
 import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { getMovies } from 'services/movie';
-import { isLoadingState, pageState, searchKeywordState, searchResults }
+import { isLoadingState, pageState, searchKeywordState, searchResultsState }
   from 'store/atoms';
 import { IMovie } from 'types/movie';
 
@@ -13,8 +13,8 @@ const SearchBar = () => {
   const setKeyword = useSetRecoilState(searchKeywordState);
   const resetPage = useResetRecoilState(pageState);
   const [isLoading, setIsLoading] = useRecoilState(isLoadingState);
-  const setMovies = useSetRecoilState<IMovie[]>(searchResults);
-  const clearMovies = useResetRecoilState(searchResults);
+  const setMovies = useSetRecoilState<IMovie[]>(searchResultsState);
+  const clearMovies = useResetRecoilState(searchResultsState);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);

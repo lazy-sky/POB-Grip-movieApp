@@ -8,7 +8,7 @@ import {
   isLoadingState,
   pageState,
   searchKeywordState,
-  searchResults
+  searchResultsState
 } from 'store/atoms';
 import { IMovie } from 'types/movie';
 
@@ -17,7 +17,7 @@ import styles from './searchResults.module.scss';
 const MovieItem = React.lazy(() => import('./MovieItem'));
 
 const SearchResults = () => {
-  const [movies, setMovies] = useRecoilState<IMovie[]>(searchResults);
+  const [movies, setMovies] = useRecoilState<IMovie[]>(searchResultsState);
   const keyword = useRecoilValue(searchKeywordState);
   const [page, setPage] = useRecoilState(pageState);
   const [isLoading, setIsLoading] = useRecoilState(isLoadingState);

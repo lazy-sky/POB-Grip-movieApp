@@ -26,8 +26,8 @@ Type 'RecoilState<never[]>' is not assignable to type 'RecoilState<IMovie[]>'.
       Types of parameters 't' and 't' are incompatible.
         Type 'IMovie[]' is not assignable to type 'never[]'.
 */
-// export const searchResults: RecoilState<IMovie[]> = atom({
-export const searchResults: any = atom({
+// export const searchResultsState: RecoilState<IMovie[]> = atom({
+export const searchResultsState: any = atom({
   key: 'searchResults',
   default: []
 });
